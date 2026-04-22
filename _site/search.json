@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "explorer.html",
+    "href": "explorer.html",
+    "title": "Explorer",
+    "section": "",
+    "text": "This is a test of embedding a Shinylive app inside a Quarto page. The app below runs entirely in your browser — no server, no cold starts.\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 500\n\nlibrary(shiny)\nlibrary(leaflet)\n\nui &lt;- fluidPage(\n  titlePanel(\"BHEI test map\"),\n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\"zoom\", \"Zoom level:\", min = 8, max = 14, value = 10)\n    ),\n    mainPanel(\n      leafletOutput(\"map\", height = \"400px\")\n    )\n  )\n)\n\nserver &lt;- function(input, output) {\n  output$map &lt;- renderLeaflet({\n    leaflet() |&gt;\n      addTiles() |&gt;\n      setView(lng = -117.15, lat = 32.72, zoom = input$zoom) |&gt;\n      addMarkers(lng = -117.15, lat = 32.72, popup = \"San Diego\")\n  })\n}\n\nshinyApp(ui, server)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BHEI Test",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  }
+]
