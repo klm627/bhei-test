@@ -1,0 +1,25 @@
+library(shiny)
+library(leaflet)
+
+ui <- fluidPage(
+  titlePanel("BHEI test map"),
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("zoom", "Zoom level:", min = 8, max = 14, value = 10)
+    ),
+    mainPanel(
+      leafletOutput("map", height = "400px")
+    )
+  )
+)
+
+server <- function(input, output) {
+  output$map <- renderLeaflet({
+    leaflet() |>
+      addTiles() |>
+      setView(lng = -117.15, lat = 32.72, zoom = input$zoom) |>
+      addMarkers(lng = -117.15, lat = 32.72, popup = "San Diego")
+  })
+}
+
+shinyApp(ui, server)
